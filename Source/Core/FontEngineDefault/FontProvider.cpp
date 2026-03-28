@@ -84,6 +84,11 @@ void FontProvider::ReleaseFontResources()
 
 bool FontProvider::LoadFontFace(const String& file_name, int face_index, bool fallback_face, Style::FontWeight weight)
 {
+	return LoadFontFace(file_name, face_index, {}, fallback_face, weight);
+}
+
+bool FontProvider::LoadFontFace(const String& file_name, int face_index, const String& font_family, bool fallback_face, Style::FontWeight weight)
+{
 	FileInterface* file_interface = GetFileInterface();
 	FileHandle handle = file_interface->Open(file_name);
 
@@ -100,7 +105,7 @@ bool FontProvider::LoadFontFace(const String& file_name, int face_index, bool fa
 	file_interface->Read(buffer, length, handle);
 	file_interface->Close(handle);
 
-	bool result = Get().LoadFontFace({buffer, length}, face_index, fallback_face, std::move(buffer_ptr), file_name, {}, Style::FontStyle::Normal, weight);
+	bool result = Get().LoadFontFace({buffer, length}, face_index, fallback_face, std::move(buffer_ptr), file_name, font_family, Style::FontStyle::Normal, weight);
 
 	return result;
 }

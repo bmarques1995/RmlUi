@@ -32,6 +32,9 @@ public:
 	/// Adds a new font face to the database. The face's family, style and weight will be determined from the face itself.
 	static bool LoadFontFace(const String& file_name, int face_index, bool fallback_face, Style::FontWeight weight = Style::FontWeight::Auto);
 
+	/// Adds a new font face to the database. The style and weight will be determined from the face itself. But you can override the font_family
+	static bool LoadFontFace(const String& file_name, int face_index, const String& font_family, bool fallback_face, Style::FontWeight weight = Style::FontWeight::Auto);
+
 	/// Adds a new font face from memory.
 	static bool LoadFontFace(Span<const byte> data, int face_index, const String& font_family, Style::FontStyle style, Style::FontWeight weight,
 		bool fallback_face);
